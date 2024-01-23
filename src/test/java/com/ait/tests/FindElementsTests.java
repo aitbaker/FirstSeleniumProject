@@ -8,6 +8,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.List;
 
 public class FindElementsTests {
@@ -22,28 +23,25 @@ public class FindElementsTests {
         driver.navigate().to("https://telranedu.web.app/login");// with history
        //maximize browser window
         driver.manage().window().maximize();
+        //wait until elements to be visible and active
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @Test
-    public void findElementByTagName() {
+    public void findElementByTagTest() {
         //find element by tag
         WebElement element = driver.findElement(By.tagName("h1"));
         System.out.println(element.getText());
 
-        //find list of elements
-        List<WebElement> elements = driver.findElements(By.tagName("a"));
-        System.out.println(elements.size());
-
-        //find element by class name
-        WebElement element1 = driver.findElement(By.className("navbar-component_nav__1X_4m"));
+        WebElement element1 = driver.findElement(By.tagName("a"));
         System.out.println(element1.getText());
 
-        //find element by name
-        WebElement email = driver.findElement(By.name("email"));
-
-        String inputText = email.getAttribute("name");
-        System.out.println("!!!! " +inputText);
+        //find list of element by tag
+        List<WebElement> elements = driver.findElements(By.tagName("a"));
+        System.out.println(elements.size());
     }
+
+
 
     @AfterMethod
     public void tearDown() {
